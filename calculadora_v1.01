@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Financeira</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container" id="div_all">
+      <h2>Simulador financeiro</h2>
+      
+
+      <div class="calc" id="div_calc_1">
+        <h2>Mês 1:</h2>
+        Insira os gastos em maquinário:
+        <input type="text" id="ipt_maquinario_1" placeholder="Insira Maquinario" />
+        Insira os gastos em manunteções:
+        <input type="text" id="ipt_manutencao_1" placeholder="Insira Manutenção" />
+        Insira os gastos nas folhas de pagamento:
+        <input type="text" id="ipt_folhaPag_1" placeholder="Insira Folha de pagamento" />
+        Insira a quantidade de horas trabalhadas
+        <input type="text" id="ipt_horas_1" placeholder="Insira Quantidade de horas" />
+        Insira o lucro obtido:
+        <input type="text" id="ipt_lucro_1" placeholder="Insira Lucro do mês" />
+        <div id="div_total_um">Total: </div>
+        <br />
+        <button onclick="total_mes_1()">Calcular Total</button>
+      </div>
+
+      <div class="calc" id="div_calc_2">
+        <b style="color: rgb(165, 1, 1);"></b>
+        <h2>Mês 2</h2>
+        Insira os gastos em maquinário
+        <input type="text" id="ipt_maquinario_2" placeholder="Insira Maquinario" />
+        Insira os gastos em manutenções
+        <input type="text" id="ipt_manutencao_2" placeholder="Insira Manutenção" />
+        Insira os gastos nas folhas de pagamento:
+        <input type="text" id="ipt_folhaPag_2" placeholder="Insira Folha de pagamento" />
+        Insira a quantidade de horas trabalhadas
+        <input type="text" id="ipt_horas_2" placeholder="Insira Quantidade de horas" />
+        Insira o lucro obtido no mês
+        <input type="text" id="ipt_lucro_2" placeholder="Insira Lucro do mês" />
+        <div id="div_total_dois">Total: </div>
+        <br />
+        <button onclick="total_mes_2()">Calcular Total</button>
+      </div>
+
+      <div class="media" id="div_calc_media">
+        <h2>Media:</h2>
+        <div id="div_media">
+          <p>Maquinário:</p>
+          <p>Manutenção:</p>
+          <p>Folha de pagamento:</p>
+          <p>Quantidade de horas:</p>
+          <p>Total em gastos:</p>
+        </div>
+        <br />
+        <button onclick="media()">Calcular</button>
+        <button onclick="comparar()">Comparar meses em %</button>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  var G_maquinario1 = 0;
+  var G_manutencao1 = 0;
+  var G_folhaPag1 = 0;
+  var G_qtdHoras1 = 0;
+  var G_somaTotal1 = (G_maquinario1 + G_manutencao1 + G_folhaPag1);
+  var G_lucro1 = 0;
+
+  var G_maquinario2 = 0;
+  var G_manutencao2 = 0;
+  var G_folhaPag2 = 0;
+  var G_qtdhoras2 = 0;
+  var G_somaTotal2 = (G_maquinario2 + G_manutencao2 + G_folhaPag2);
+  var G_lucro2 = 0;
+
+    function total_mes_1() {
+      G_maquinario1 = Number(ipt_maquinario_1.value);
+      G_manutencao1 = Number(ipt_manutencao_1.value);
+      G_folhaPag1 = Number(ipt_folhaPag_1.value);
+      G_qtdHoras1 = Number(ipt_horas_1.value);
+      G_lucro1 = Number(ipt_lucro_2.value); 
+      G_somaTotal1 = G_maquinario1 + G_manutencao1 + G_folhaPag1;
+    
+
+      div_total_um.innerHTML = (`Voce gastou ao todo: ${G_somaTotal1} em: ${G_qtdHoras1} Hrs mensais trabalhadas.`);
+    }
+
+  function total_mes_2() {
+      G_maquinario2 = Number(ipt_maquinario_2.value);
+      G_manutencao2 = Number(ipt_manutencao_2.value);
+      G_folhaPag2 = Number(ipt_folhaPag_2.value);
+      G_qtdHoras2 = Number(ipt_horas_2.value);
+      G_lucro2 = Number(ipt_lucro_2.value); 
+      G_somaTotal2 = G_maquinario2 + G_manutencao2 + G_folhaPag2;
+
+      div_total_dois.innerHTML = (`Voce gastou ao todo: ${G_somaTotal2} em: ${G_qtdHoras2} Hrs mensais trabalhadas.`);
+    }
+
+    var comparacaoMaquinario = ((G_maquinario2 - G_maquinario1) / G_maquinario1) * 100;
+    var comparacaoManutencao = ((G_manutencao2 - G_manutencao1) / G_manutencao1) * 100;
+    var comparacaoFolhaPag = ((G_folhaPag2 - G_folhaPag1) / G_folhaPag1) * 100;
+    var comparacaoHoras = ((G_qtdHoras2 - G_qtdHoras1) / G_qtdHoras1) * 100;
+    var comparacaoTotalGastos = ((G_somaTotal2 - G_somaTotal1) / G_somaTotal1) * 100;
+    var comparacaoLucro = ((G_lucro2 - G_lucro1) / G_lucro1) * 100;
+    
+    if(comparacaoTotalGastos > 0){
+
+    div_media.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                            <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                            <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                            <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                            <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                            <p>Voce teve um lucro de:  <b style="color: #4CAF50"> +${comparacaoLucro.toFixed(2)}</b>%</p>`);
+    }else{
+          div_media.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                            <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                            <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                            <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                            <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                            <p>Voce teve um lucro de: <b style="color: rgb(165, 1, 1);">${comparacaoLucro.toFixed(2)}</b>%</p>`);
+    }
+</script>function media() {
+
+      var mediaMaquinario = (G_maquinario1 + G_maquinario2) / 2;
+      var mediaManutencao = (G_manutencao1 + G_manutencao2) / 2;
+      var mediaFolhaPag = (G_folhaPag1 + G_folhaPag2) / 2;
+      var mediaHoras = (G_qtdHoras1 + G_qtdHoras2) / 2;
+      var mediaTotalGastos = (G_somaTotal1 + G_somaTotal2) / 2;
+
+      div_media.innerHTML = (`<p>Maquinário: ${mediaMaquinario}R$</p>
+                              <p>Manutenção: ${mediaManutencao}R$</p>
+                              <p>Folha de pagamento: ${mediaFolhaPag}R$</p>
+                              <p>Quantidade de horas: ${mediaHoras}R$</p>
+                              <p>Total em gastos: ${mediaTotalGastos}R$</p>`);
+    }
+
+function comparar() {
+    var comparacaoMaquinario = ((G_maquinario2 - G_maquinario1) / G_maquinario1) * 100;
+    var comparacaoManutencao = ((G_manutencao2 - G_manutencao1) / G_manutencao1) * 100;
+    var comparacaoFolhaPag = ((G_folhaPag2 - G_folhaPag1) / G_folhaPag1) * 100;
+    var comparacaoHoras = ((G_qtdHoras2 - G_qtdHoras1) / G_qtdHoras1) * 100;
+    var comparacaoTotalGastos = ((G_somaTotal2 - G_somaTotal1) / G_somaTotal1) * 100;
+    var comparacaoLucro = ((G_lucro2 - G_lucro1) / G_lucro1) * 100;
+    
+    if(comparacaoTotalGastos > 0){
+
+    div_media.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                            <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                            <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                            <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                            <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                            <p>Voce teve um lucro de:  <b style="color: #4CAF50"> +${comparacaoLucro.toFixed(2)}</b>%</p>`);
+    }else{
+          div_media.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                            <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                            <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                            <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                            <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                            <p>Voce teve um lucro de: <b style="color: rgb(165, 1, 1);">${comparacaoLucro.toFixed(2)}</b>%</p>`);
+    }
+  }
+</script>
+
